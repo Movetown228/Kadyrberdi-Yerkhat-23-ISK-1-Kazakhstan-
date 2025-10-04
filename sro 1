@@ -1,0 +1,56 @@
+public class SRO3 {
+    public static void main(String[] args) {
+        Employee dev = new Developer("Айдын", 500000, "Java");
+        Employee mgr = new Manager("Алия", 700000, 5);
+        dev.introduce();
+        dev.work();
+        mgr.introduce();
+        mgr.work();
+        System.out.println("\n=== Полиморфизм ===");
+        Employee[] employees = {dev, mgr};
+        for (Employee e : employees) {
+            e.work();
+        }
+    }
+}
+abstract class Employee {
+    protected String name;
+    protected double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+    public abstract void work();
+    public abstract void introduce();
+}
+class Developer extends Employee {
+    private String programmingLanguage;
+    public Developer(String name, double salary, String programmingLanguage) {
+        super(name, salary);
+        this.programmingLanguage = programmingLanguage;
+    }
+    @Override
+    public void work() {
+        System.out.println(name + " пишет код на " + programmingLanguage + ".");
+    }
+    @Override
+    public void introduce() {
+        System.out.println("Привет! Я разработчик " + name + ", моя зарплата " + salary + " тг.");
+    }
+}
+class Manager extends Employee {
+    private int teamSize;
+    public Manager(String name, double salary, int teamSize) {
+        super(name, salary);
+        this.teamSize = teamSize;
+    }
+    @Override
+    public void work() {
+        System.out.println(name + " управляет командой из " + teamSize + " человек.");
+    }
+    @Override
+    public void introduce() {
+        System.out.println("Привет! Я менеджер " + name + ", моя зарплата " + salary + " тг.");
+    }
+}
