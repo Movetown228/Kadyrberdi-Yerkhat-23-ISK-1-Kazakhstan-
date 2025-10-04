@@ -1,0 +1,67 @@
+public class SRO3 {
+    public static void main(String[] args) {
+        Developer2 dev = new Developer2("Айдар", 500000, "Java");
+        Manager2 mgr = new Manager2("Алия", 700000, 5);
+        dev.introduce();
+        dev.work();
+        dev.attendTraining();
+        mgr.introduce();
+        mgr.work();
+        mgr.generateReport();
+    }
+}
+abstract class Employee {
+    protected String name;
+    protected double salary;
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+    public abstract void work();
+    public abstract void introduce();
+}
+interface Reportable {
+    void generateReport();
+}
+
+interface Trainable {
+    void attendTraining();
+}
+class Developer2 extends Employee implements Trainable {
+    private String programmingLanguage;
+    public Developer2(String name, double salary, String programmingLanguage) {
+        super(name, salary);
+        this.programmingLanguage = programmingLanguage;
+    }
+    @Override
+    public void work() {
+        System.out.println(name + " пишет код на " + programmingLanguage + ".");
+    }
+    @Override
+    public void introduce() {
+        System.out.println("Привет! Я разработчик " + name + ".");
+    }
+    @Override
+    public void attendTraining() {
+        System.out.println(name + " проходит тренинг по " + programmingLanguage + ".");
+    }
+}
+class Manager2 extends Employee implements Reportable {
+    private int teamSize;
+    public Manager2(String name, double salary, int teamSize) {
+        super(name, salary);
+        this.teamSize = teamSize;
+    }
+    @Override
+    public void work() {
+        System.out.println(name + " управляет командой из " + teamSize + " человек.");
+    }
+    @Override
+    public void introduce() {
+        System.out.println("Привет! Я менеджер " + name + ".");
+    }
+    @Override
+    public void generateReport() {
+        System.out.println(name + " составляет отчёт по команде из " + teamSize + " человек.");
+    }
+}
